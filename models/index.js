@@ -10,6 +10,7 @@ mongoose.Promise = global.Promise;
 const db = {};
 db.mongoose = mongoose;
 db.url = dbUrl;
+db.products = require("./product.model.js")(mongoose);
 db.users = require("./user.model")(mongoose);
 db.roles = require("./role.model")(mongoose);
 

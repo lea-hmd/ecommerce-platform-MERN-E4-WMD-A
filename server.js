@@ -73,6 +73,7 @@ app.get('/', (req, res) => {
 //Importation des routes des requêtes
 require('./routes/users.routes')(app);
 require('./routes/auth.routes')(app);
+require('./routes/products.routes')(app);
 
 //Création du serveur web et écoute des requêtes
 const PORT = process.env.PORT || 8080;
