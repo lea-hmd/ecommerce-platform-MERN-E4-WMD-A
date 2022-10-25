@@ -1,0 +1,1542 @@
+{
+	"info": {
+		"_postman_id": "5875fac9-71d3-4301-9b6a-e9eec70326e4",
+		"name": "4FULLBK",
+		"description": "Projet de plateforme ecommerce E4 WMD A",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17910570"
+	},
+	"item": [
+		{
+			"name": "Gestion des utilisateurs",
+			"item": [
+				{
+					"name": "AUTH",
+					"item": [
+						{
+							"name": "Connexion d'un utilisateur",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//Récupération du token d'authentification",
+											"var jwt = JSON.parse(responseBody);",
+											"",
+											"//Stockage du token dans la variable de collection 'token'",
+											"pm.collectionVariables.set(\"token\", jwt.accessToken);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "lhmd",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "test",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{url}}:3000/api/auth/signin",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"signin"
+									]
+								},
+								"description": "Permet de connecter un utilisateur à l'api afin de pouvoir accéder aux routes protégées.\n\nCette requête est accessible à un utilisateur non connecté.\n\nElle retourne (en réponse) en cas de succès un token d'authentification valable 1h."
+							},
+							"response": [
+								{
+									"name": "Connexion d'un utilisateur",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "username",
+													"value": "admin",
+													"description": "Compte test admin",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "admin",
+													"description": "Compte test admin",
+													"type": "text"
+												},
+												{
+													"key": "username",
+													"value": "cm",
+													"description": "Compte test content manager",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "password",
+													"value": "cm",
+													"description": "Compte test content manager",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/auth/signin",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"auth",
+												"signin"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes d'authentification des utilisateurs."
+				},
+				{
+					"name": "CREATE",
+					"item": [
+						{
+							"name": "Inscription d'un utilisateur",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "lhmd",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "lhmd@estiam.fr",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "test",
+											"type": "text"
+										},
+										{
+											"key": "roles",
+											"value": "admin",
+											"description": "Par défaut : user",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{url}}:3000/api/auth/signup",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"signup"
+									]
+								},
+								"description": "Permet d'ajouter un nouvel utilisateur via un formulaire x-www-form-urlencoded dans le body.\n\nSi aucun rôle n'est spécifié, il se verra attribué le rôle de user\n\nL'authentification d'un administrateur est requise pour l'exécution de cette requête. Il faut ainsi s'assurer d' avoir un header \"x-access-token\" avec comme valeur le token de la session de l'admin."
+							},
+							"response": [
+								{
+									"name": "Inscription d'un utilisateur",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-access-token",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "username",
+													"value": "gp9",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "gp9@estiam.fr",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "test",
+													"type": "text"
+												},
+												{
+													"key": "roles",
+													"value": "admin",
+													"description": "Par défaut : Content Manager",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/auth/signup",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"auth",
+												"signup"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes d'ajout de données."
+				},
+				{
+					"name": "READ",
+					"item": [
+						{
+							"name": "Afficher tous les utilisateurs",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{url}}:3000/api/users/all",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"all"
+									]
+								},
+								"description": "Permet de récupérer tous les utilisateurs de la bdd.\n\nL'authentification d'un administrateur ou d'un gestionnaire de plateforme est requise pour l'exécution de cette requête. Il faut ainsi s'assurer d' avoir un header \"x-access-token\" avec comme valeur le token de la session de l'user."
+							},
+							"response": []
+						},
+						{
+							"name": "Afficher les données d'un utilisateur en fonction de leur id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{url}}:3000/api/users/:id",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "635822b286b978125f408494"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Afficher les données d'un utilisateur en fonction de leur id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/api/users/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "61aa2b1a101893c97cdf88b2"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes d'affichage de données."
+				},
+				{
+					"name": "UPDATE",
+					"item": [
+						{
+							"name": "Modification d'un utilisateur",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "lhmd",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "test",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "lea@estiam.fr",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{url}}:3000/api/users/updateById/:id",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"updateById",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "635822b286b978125f408494"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Modification d'un utilisateur",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "username",
+													"value": "cm",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "cm",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "lea@cm.fr",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/users/updateById/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"users",
+												"updateById",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "61abe94e63256f7c43c0653d"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes de modification de données."
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "Suppression d'un utilisateur en fonction de son id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{url}}:3000/api/users/deleteById/:id",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"deleteById",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "635822b286b978125f408494"
+										}
+									]
+								},
+								"description": "Permet de supprimer un utilisateur en fonction de son id.\n\nL'authentification d'un administrateur est requise pour l'exécution de cette requête. Il faut ainsi s'assurer d' avoir un header \"x-access-token\" avec comme valeur le token de la session de l'admin."
+							},
+							"response": [
+								{
+									"name": "Suppression d'un utilisateur en fonction de son id",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/api/users/deleteById/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"users",
+												"deleteById",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "61abe94e63256f7c43c0653d"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes de suppression de données."
+				}
+			],
+			"description": "Ensemble de requêtes effectuant des actions concernant les données des utilisateurs de la plateforme."
+		},
+		{
+			"name": "Gestion des produits",
+			"item": [
+				{
+					"name": "CREATE",
+					"item": [
+						{
+							"name": "Ajouter une donnée",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"productName\": \"Test\",\n        \"productDescription\": \"Test\" ,\n        \"productPrice\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{url}}:3000/api/products/addOne",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"products",
+										"addOne"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ajouter une donnée à la page financements",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "title",
+													"value": "Test",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "test",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/financements/addOne",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"financements",
+												"addOne"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "Ajouter plusieurs données",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n     \"products\":[{\n  \"productName\": \"Gingerale - Schweppes, 355 Ml\",\n  \"productDescription\": \"Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\\n\\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\",\n  \"productPrice\": 75\n}, {\n  \"productName\": \"Leeks - Baby, White\",\n  \"productDescription\": \"In congue. Etiam justo. Etiam pretium iaculis justo.\\n\\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\",\n  \"productPrice\": 47\n}, {\n  \"productName\": \"Bouq All Italian - Primerba\",\n  \"productDescription\": \"Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\\n\\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\\n\\nProin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.\",\n  \"productPrice\": 42\n}, {\n  \"productName\": \"Daves Island Stinger\",\n  \"productDescription\": \"Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\\n\\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\\n\\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\",\n  \"productPrice\": 32\n}, {\n  \"productName\": \"Sprouts - Peppercress\",\n  \"productDescription\": \"Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\\n\\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\\n\\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\",\n  \"productPrice\": 19\n}, {\n  \"productName\": \"Club Soda - Schweppes, 355 Ml\",\n  \"productDescription\": \"In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\",\n  \"productPrice\": 96\n}, {\n  \"productName\": \"Tea - Decaf 1 Cup\",\n  \"productDescription\": \"Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.\",\n  \"productPrice\": 83\n}, {\n  \"productName\": \"Shrimp - Black Tiger 26/30\",\n  \"productDescription\": \"Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\\n\\nPhasellus in felis. Donec semper sapien a libero. Nam dui.\",\n  \"productPrice\": 20\n}, {\n  \"productName\": \"Pepper - Chipotle, Canned\",\n  \"productDescription\": \"Fusce consequat. Nulla nisl. Nunc nisl.\",\n  \"productPrice\": 39\n}, {\n  \"productName\": \"Bread - Wheat Baguette\",\n  \"productDescription\": \"In congue. Etiam justo. Etiam pretium iaculis justo.\\n\\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\",\n  \"productPrice\": 41\n}, {\n  \"productName\": \"Flounder - Fresh\",\n  \"productDescription\": \"In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\\n\\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\",\n  \"productPrice\": 49\n}, {\n  \"productName\": \"Napkin - Cocktail,beige 2 - Ply\",\n  \"productDescription\": \"Phasellus in felis. Donec semper sapien a libero. Nam dui.\",\n  \"productPrice\": 56\n}, {\n  \"productName\": \"Cheese - Cottage Cheese\",\n  \"productDescription\": \"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\",\n  \"productPrice\": 5\n}, {\n  \"productName\": \"Daikon Radish\",\n  \"productDescription\": \"Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\\n\\nSed ante. Vivamus tortor. Duis mattis egestas metus.\\n\\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\",\n  \"productPrice\": 41\n}, {\n  \"productName\": \"Nut - Hazelnut, Whole\",\n  \"productDescription\": \"Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\\n\\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\\n\\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\",\n  \"productPrice\": 7\n}, {\n  \"productName\": \"Carbonated Water - Strawberry\",\n  \"productDescription\": \"Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\\n\\nSed ante. Vivamus tortor. Duis mattis egestas metus.\",\n  \"productPrice\": 34\n}, {\n  \"productName\": \"Chips Potato All Dressed - 43g\",\n  \"productDescription\": \"Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.\\n\\nPraesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\\n\\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\",\n  \"productPrice\": 37\n}, {\n  \"productName\": \"Cheese - Mozzarella, Shredded\",\n  \"productDescription\": \"Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\\n\\nIn congue. Etiam justo. Etiam pretium iaculis justo.\",\n  \"productPrice\": 97\n}, {\n  \"productName\": \"Bread - Rye\",\n  \"productDescription\": \"Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\\n\\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\",\n  \"productPrice\": 1\n}, {\n  \"productName\": \"Orange - Canned, Mandarin\",\n  \"productDescription\": \"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\",\n  \"productPrice\": 18\n}, {\n  \"productName\": \"Gherkin - Sour\",\n  \"productDescription\": \"Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\",\n  \"productPrice\": 92\n}, {\n  \"productName\": \"Spinach - Frozen\",\n  \"productDescription\": \"Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.\",\n  \"productPrice\": 65\n}, {\n  \"productName\": \"Halibut - Steaks\",\n  \"productDescription\": \"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\",\n  \"productPrice\": 7\n}, {\n  \"productName\": \"Cheese Cheddar Processed\",\n  \"productDescription\": \"In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\\n\\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\",\n  \"productPrice\": 46\n}, {\n  \"productName\": \"Pasta - Lasagna Noodle, Frozen\",\n  \"productDescription\": \"Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\\n\\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\\n\\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\",\n  \"productPrice\": 84\n}, {\n  \"productName\": \"Huck Towels White\",\n  \"productDescription\": \"Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\",\n  \"productPrice\": 72\n}, {\n  \"productName\": \"Coke - Classic, 355 Ml\",\n  \"productDescription\": \"Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\\n\\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\",\n  \"productPrice\": 53\n}, {\n  \"productName\": \"Butcher Twine 4r\",\n  \"productDescription\": \"Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\\n\\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\",\n  \"productPrice\": 17\n}, {\n  \"productName\": \"Nantucket Pine Orangebanana\",\n  \"productDescription\": \"Fusce consequat. Nulla nisl. Nunc nisl.\",\n  \"productPrice\": 15\n}, {\n  \"productName\": \"Arctic Char - Fresh, Whole\",\n  \"productDescription\": \"In congue. Etiam justo. Etiam pretium iaculis justo.\\n\\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\\n\\nNulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.\",\n  \"productPrice\": 62\n}, {\n  \"productName\": \"Sauce - Mint\",\n  \"productDescription\": \"Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\\n\\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\",\n  \"productPrice\": 45\n}, {\n  \"productName\": \"Appetizer - Mushroom Tart\",\n  \"productDescription\": \"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.\",\n  \"productPrice\": 64\n}, {\n  \"productName\": \"Tamarillo\",\n  \"productDescription\": \"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\\n\\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\\n\\nFusce consequat. Nulla nisl. Nunc nisl.\",\n  \"productPrice\": 44\n}, {\n  \"productName\": \"Beer - Sleemans Cream Ale\",\n  \"productDescription\": \"Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\",\n  \"productPrice\": 34\n}, {\n  \"productName\": \"Sauce - Ranch Dressing\",\n  \"productDescription\": \"Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.\",\n  \"productPrice\": 39\n}, {\n  \"productName\": \"Jerusalem Artichoke\",\n  \"productDescription\": \"Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\",\n  \"productPrice\": 79\n}, {\n  \"productName\": \"Spinach - Baby\",\n  \"productDescription\": \"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.\",\n  \"productPrice\": 42\n}, {\n  \"productName\": \"Beef - Short Ribs\",\n  \"productDescription\": \"Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\\n\\nPhasellus in felis. Donec semper sapien a libero. Nam dui.\",\n  \"productPrice\": 73\n}, {\n  \"productName\": \"Dry Ice\",\n  \"productDescription\": \"Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\\n\\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\",\n  \"productPrice\": 12\n}, {\n  \"productName\": \"External Supplier\",\n  \"productDescription\": \"Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\\n\\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\",\n  \"productPrice\": 65\n}, {\n  \"productName\": \"Syrup - Monin, Swiss Choclate\",\n  \"productDescription\": \"Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\\n\\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\\n\\nIn congue. Etiam justo. Etiam pretium iaculis justo.\",\n  \"productPrice\": 59\n}, {\n  \"productName\": \"True - Vue Containers\",\n  \"productDescription\": \"Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\\n\\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.\\n\\nDonec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\",\n  \"productPrice\": 75\n}, {\n  \"productName\": \"Table Cloth 54x54 Colour\",\n  \"productDescription\": \"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\",\n  \"productPrice\": 7\n}, {\n  \"productName\": \"Soup - Campbells Chili Veg\",\n  \"productDescription\": \"Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\\n\\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\",\n  \"productPrice\": 99\n}, {\n  \"productName\": \"Sherbet - Raspberry\",\n  \"productDescription\": \"Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\\n\\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\\n\\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\",\n  \"productPrice\": 24\n}, {\n  \"productName\": \"Cake Slab\",\n  \"productDescription\": \"In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\",\n  \"productPrice\": 28\n}, {\n  \"productName\": \"7up Diet, 355 Ml\",\n  \"productDescription\": \"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\\n\\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\",\n  \"productPrice\": 14\n}, {\n  \"productName\": \"Chilli Paste, Hot Sambal Oelek\",\n  \"productDescription\": \"Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\\n\\nIn congue. Etiam justo. Etiam pretium iaculis justo.\\n\\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\",\n  \"productPrice\": 16\n}, {\n  \"productName\": \"Eggplant Oriental\",\n  \"productDescription\": \"Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\\n\\nFusce consequat. Nulla nisl. Nunc nisl.\",\n  \"productPrice\": 14\n}, {\n  \"productName\": \"Curry Paste - Green Masala\",\n  \"productDescription\": \"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.\\n\\nVestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\\n\\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\",\n  \"productPrice\": 20\n}]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{url}}:3000/api/products/addMany",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"products",
+										"addMany"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ajouter plusieurs données à la page financements",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n     \"financements\": [\n          {\n               \"title\": \"Éstiam a passé un accord avec la Caisse d’Épargne pour une scolarité autofinancée\",\n               \"description\": \"La Caisse d’Épargne vous prête (sous réserve d’acceptation de votre dossier) de quoi payer vos premières années de scolarité, et vous remboursez pendant vos années 3, 4 et 5 avec vos salaires de l’alternance (salaire minimum légal 70% du SMIC soit un salaire mensuel de 1077€ en 2020). Le taux d’intérêt du prêt est fixé au mois de mai pour chaque année scolaire. En 2018 et en 2019, le TAEG était de 0,90%. \"\n          },\n          {\n               \"title\": \"Des études financées ouvertes à tous\",\n               \"description\": \"Vous aurez terminé de rembourser la Caisse d’Épargne avant la fin de vos études à l’Éstiam, vous commencerez ainsi votre carrière professionnelle avec sérénité en profitant pleinement de vos premiers salaires.\"\n          },\n          {\n               \"title\": \"FRAIS DE DOSSIER, D’ADMISSION, D’EXAMENS\",\n               \"description\": \"AUCUN\"\n          },\n          {\n               \"title\": \"DROITS DE SCOLARITÉ ANNUELS\",\n               \"description\": \"En alternance 0€ rien à la charge des familles car payé par l’employeur. | Hors alternance inscription après le 15 juillet 9.900€. | Hors alternance inscription avant le 15 juillet 6.800€.\"\n          },\n          {\n               \"title\": \"FRAIS DE MOBILITÉ INTERNATIONALE\",\n               \"description\": \" Hors alternance 1.500€ couvrant les frais de scolarité internationaux et l’hébergement.\"\n          },\n          {\n               \"title\": \"ACOMPTE À L’INSCRIPTION à déduire des droits de scolarité\",\n               \"description\": \"Hors alternance 1.300€ | Hors alternance inscription après le 15 juillet 2.400€ | En alternance 0€ rien à la charge des familles car payé par l’employeur.\"\n          },\n          {\n               \"title\": \"PAIEMENTS ÉCHELONNÉS\",\n               \"description\": \"Hors alternance 10 x sans frais | En alternance 0€ rien à la charge des familles car payé par l’employeur.\"\n          },\n          {\n               \"title\": \"Une scolarité autofinancée\",\n               \"description\": \"\"\n          }\n     ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/financements/addMany",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"financements",
+												"addMany"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes d'ajout de données."
+				},
+				{
+					"name": "READ",
+					"item": [
+						{
+							"name": "Afficher toutes les données",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{url}}:3000/api/products/all",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"products",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Afficher les données en fonction de leur id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{url}}:3000/api/products/:id",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"products",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6358281434e9f7f6cc79494c"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Afficher les données de la page financement en fonction de leur titre",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/api/financements/:title",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"financements",
+												":title"
+											],
+											"variable": [
+												{
+													"key": "title",
+													"value": null
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes d'affichage de données."
+				},
+				{
+					"name": "UPDATE",
+					"item": [
+						{
+							"name": "Modification d'une donnée",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "productName",
+											"value": "Testupdate",
+											"type": "text"
+										},
+										{
+											"key": "productDescription",
+											"value": "TestTestupdate",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{url}}:3000/api/products/updateById/:id",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"products",
+										"updateById",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6358281434e9f7f6cc79494c",
+											"description": "Mettre l'id du document à modifier"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Modification d'une donnée de la page financement",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "title",
+													"value": "Test",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "Test",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/financements/updateById/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"financements",
+												"updateById",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "",
+													"description": "Mettre l'id du document à modifier"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "Modification d'une donnée",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "productName",
+											"value": "yes",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Test",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{url}}:3000/api/products/updateByName/:name",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"products",
+										"updateByName",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Testupdate"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Modification d'une donnée de la page financement",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "title",
+													"value": "Test",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "Test",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/financements/updateById/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"financements",
+												"updateById",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "",
+													"description": "Mettre l'id du document à modifier"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes de modification de données."
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "Supprimer toutes les données",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{url}}:3000/api/products/deleteAll",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"products",
+										"deleteAll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Supprimer une donnée",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{url}}:3000/api/products/deleteById/:id",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"products",
+										"deleteById",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6358281434e9f7f6cc79494c",
+											"description": "Mettre l'id du document à supprimer"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Supprimer une donnée de la page financement via son id",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/api/financements/deleteById/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"financements",
+												"deleteById",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "",
+													"description": "Mettre l'id du document à supprimer"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes de suppression de données."
+				}
+			]
+		},
+		{
+			"name": "Gestion du panier",
+			"item": [
+				{
+					"name": "CREATE",
+					"item": [
+						{
+							"name": "Ajouter une donnée",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\": \"63582975b821114657887a4c\",\n    \"quantity\": 4\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{url}}:3000/api/cart/addProduct/:userId",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"cart",
+										"addProduct",
+										":userId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "635822b286b978125f408494"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ajouter une donnée à la page financements",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "title",
+													"value": "Test",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "test",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://{{url}}:3000/api/financements/addOne",
+											"protocol": "http",
+											"host": [
+												"{{url}}"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"financements",
+												"addOne"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes d'ajout de données."
+				},
+				{
+					"name": "READ",
+					"item": [
+						{
+							"name": "Afficher les données en fonction de leur id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{url}}:3000/api/cart/allProducts/:userId",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"cart",
+										"allProducts",
+										":userId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "635822b286b978125f408494"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Afficher les données de la page financement en fonction de leur titre",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://{{url}}:3000/api/financements/:title",
+											"protocol": "http",
+											"host": [
+												"{{url}}"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"financements",
+												":title"
+											],
+											"variable": [
+												{
+													"key": "title",
+													"value": null
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes d'affichage de données."
+				},
+				{
+					"name": "UPDATE",
+					"item": [
+						{
+							"name": "Modification d'une donnée",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\": \"63582975b821114657887a4b\",\n    \"quantity\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{url}}:3000/api/cart/updateProduct/:userId",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"cart",
+										"updateProduct",
+										":userId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "635822b286b978125f408494"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Modification d'une donnée de la page financement",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "title",
+													"value": "Test",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "Test",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://{{url}}:3000/api/financements/updateById/:id",
+											"protocol": "http",
+											"host": [
+												"{{url}}"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"financements",
+												"updateById",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "",
+													"description": "Mettre l'id du document à modifier"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes de modification de données."
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "Supprimer une donnée",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{url}}:3000/api/cart/deleteProduct/:userId/:pId",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"cart",
+										"deleteProduct",
+										":userId",
+										":pId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "635822b286b978125f408494"
+										},
+										{
+											"key": "pId",
+											"value": "63582975b821114657887a4d"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Supprimer une donnée de la page financement via son id",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://{{url}}:3000/api/financements/deleteById/:id",
+											"protocol": "http",
+											"host": [
+												"{{url}}"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"financements",
+												"deleteById",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "",
+													"description": "Mettre l'id du document à supprimer"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes de suppression de données."
+				}
+			]
+		},
+		{
+			"name": "Gestion de la commande",
+			"item": [
+				{
+					"name": "CREATE",
+					"item": [
+						{
+							"name": "Ajouter une donnée",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "paymentMethod",
+											"value": "Carte bancaire",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{url}}:3000/api/orders/payment/:userId",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"orders",
+										"payment",
+										":userId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "635822b286b978125f408494"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ajouter une donnée à la page financements",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "title",
+													"value": "Test",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "test",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://{{url}}:3000/api/financements/addOne",
+											"protocol": "http",
+											"host": [
+												"{{url}}"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"financements",
+												"addOne"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes d'ajout de données."
+				},
+				{
+					"name": "READ",
+					"item": [
+						{
+							"name": "Afficher les données en fonction de leur id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{url}}:3000/api/orders/all/:userId",
+									"protocol": "http",
+									"host": [
+										"{{url}}"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"orders",
+										"all",
+										":userId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "635822b286b978125f408494"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Afficher les données de la page financement en fonction de leur titre",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://{{url}}:3000/api/financements/:title",
+											"protocol": "http",
+											"host": [
+												"{{url}}"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"financements",
+												":title"
+											],
+											"variable": [
+												{
+													"key": "title",
+													"value": null
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "Dossier contenant les requêtes d'affichage de données."
+				}
+			]
+		},
+		{
+			"name": "Root",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{url}}:3000/",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				},
+				"description": "Route racine du serveur."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"//Permet d'ajouter automatiquement notre header qui va contenir le token requis à l'exécution de certaines requêtes protégées.",
+					"pm.request.addHeader('x-access-token: {{token}}')"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "url",
+			"value": "localhost"
+		}
+	]
+}
