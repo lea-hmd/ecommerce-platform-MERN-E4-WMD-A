@@ -19,7 +19,6 @@ module.exports = function (app) {
   //Route de la requête de création d'un utilisateur
   router.post(
     "/auth/signup",
-    [authJwt.verifyToken, authJwt.isRole],
     checking.verifyRoleSignUp,
     auth.signup
   );

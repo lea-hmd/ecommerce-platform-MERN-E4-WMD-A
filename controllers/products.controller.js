@@ -1,6 +1,6 @@
 //Importation des modules utilisés
 const db = require('../models');
-const Product = db.product;
+const Product = db.products;
 
 /*------------ AJOUT ------------*/
 
@@ -13,7 +13,7 @@ exports.createOne = (req, res) => {
 
   //Enregistrement du produit dans la bdd
   product
-    .save(product)
+    .save()
     .then((data) => {
       res.send(data);
     })
@@ -26,9 +26,9 @@ exports.createOne = (req, res) => {
 
 //Ajout de plusieurs produits
 exports.createMany = (req, res) => {
-  Product.insertMany(req.body.product)
+  Product.insertMany(req.body.products)
     .then((data) => {
-      res.send(data);
+      res.send(data)
     })
     .catch((err) => {
       res

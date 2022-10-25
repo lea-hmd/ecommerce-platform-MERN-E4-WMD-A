@@ -7,7 +7,6 @@ module.exports = (mongoose) => {
         productName: { type: String, unique: true, required: true },
         productDescription: { type: String, required: false },
         productPrice: { type: Number, required: true },
-        productQuantity: { type: Number, required: true, min: 0 },
       },
       { timestamps: true }
     )

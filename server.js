@@ -74,6 +74,8 @@ app.get('/', (req, res) => {
 require('./routes/users.routes')(app);
 require('./routes/auth.routes')(app);
 require('./routes/products.routes')(app);
+require('./routes/orders.routes')(app);
+require('./routes/cart.routes')(app);
 
 //Création du serveur web et écoute des requêtes
 const PORT = process.env.PORT || 8080;
